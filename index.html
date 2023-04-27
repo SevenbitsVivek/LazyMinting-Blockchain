@@ -36,10 +36,22 @@
                                     <input type="text" id="signature" class="form-control" type="text"
                                         placeholder="signature"> </input>
                                 </div>
+                                <div class=" container">
+                                    <button type="button" class="btn btn-outline-info" onclick="redeem()">Buy
+                                        NFT</button>
+                                </div>
                             </div>
+                            <input type="Number" id="bid_price" class="form-control" type="Number"
+                                placeholder="bid_price"> </input>
                             <div class=" container">
-                                <button type="button" class="btn btn-outline-info" onclick="redeem()">Buy
+                                <button type="button" class="btn btn-outline-info" onclick="bidNFT()">Bid
                                     NFT</button>
+                            </div>
+                            <input type="Number" id="end_Auction" class="form-control" type="Number"
+                                placeholder="end_Auction"> </input>
+                            <div class=" container">
+                                <button type="button" class="btn btn-outline-info" onclick="endAuction()">End
+                                    Auction</button>
                             </div>
                     </div>
                     </form>
@@ -47,30 +59,31 @@
             </div>
         </div>
         </div>
-
     </section>
-
     <script>
-
-        var smartContractAddress = '0x617E23a822EcD5100829B98D63846D585394c0EF';
-        var smartContractAbi = [{ "inputs": [], "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "approved", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "Approval", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "operator", "type": "address" }, { "indexed": false, "internalType": "bool", "name": "approved", "type": "bool" }], "name": "ApprovalForAll", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": false, "internalType": "address", "name": "buyer", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "indexed": true, "internalType": "string", "name": "tokenURI", "type": "string" }, { "indexed": true, "internalType": "uint256", "name": "price", "type": "uint256" }], "name": "Mint", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "previousOwner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "newOwner", "type": "address" }], "name": "OwnershipTransferred", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "from", "type": "address" }, { "indexed": true, "internalType": "address", "name": "to", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "Transfer", "type": "event" }, { "inputs": [{ "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "approve", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "owner", "type": "address" }], "name": "balanceOf", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "getApproved", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "owner", "type": "address" }, { "internalType": "address", "name": "operator", "type": "address" }], "name": "isApprovedForAll", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "name", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "ownerOf", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "bytes32", "name": "hash", "type": "bytes32" }, { "internalType": "bytes", "name": "signature", "type": "bytes" }], "name": "recoverSigner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "pure", "type": "function" }, { "inputs": [{ "components": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "internalType": "uint256", "name": "price", "type": "uint256" }, { "internalType": "string", "name": "tokenURI", "type": "string" }], "internalType": "struct LazyMinting.NFTVoucher", "name": "voucher", "type": "tuple" }, { "internalType": "bytes32", "name": "hash", "type": "bytes32" }, { "internalType": "bytes", "name": "signature", "type": "bytes" }], "name": "redeem", "outputs": [], "stateMutability": "payable", "type": "function" }, { "inputs": [], "name": "renounceOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "from", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "safeTransferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "from", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "internalType": "bytes", "name": "_data", "type": "bytes" }], "name": "safeTransferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "operator", "type": "address" }, { "internalType": "bool", "name": "approved", "type": "bool" }], "name": "setApprovalForAll", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "bytes4", "name": "interfaceId", "type": "bytes4" }], "name": "supportsInterface", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "symbol", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "tokenURI", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "from", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "transferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "newOwner", "type": "address" }], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }]
-        var myContract, provider, signer, daiWithSigner;
+        var smartContractAddress = '0x0a09c237F9690DFc058401947A8ef04377daa8b0';
+        var smartContractAbi = [{ "inputs": [], "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "approved", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "Approval", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "operator", "type": "address" }, { "indexed": false, "internalType": "bool", "name": "approved", "type": "bool" }], "name": "ApprovalForAll", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "indexed": true, "internalType": "string", "name": "tokenURI", "type": "string" }, { "indexed": true, "internalType": "uint256", "name": "price", "type": "uint256" }], "name": "Mint", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "uint256", "name": "_tokenId", "type": "uint256" }, { "indexed": false, "internalType": "address", "name": "_bidder", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "_bidAmount", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "_startTime", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "_endTime", "type": "uint256" }], "name": "NftBidded", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "previousOwner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "newOwner", "type": "address" }], "name": "OwnershipTransferred", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "from", "type": "address" }, { "indexed": true, "internalType": "address", "name": "to", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "Transfer", "type": "event" }, { "inputs": [{ "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "approve", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "owner", "type": "address" }], "name": "balanceOf", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_tokenId", "type": "uint256" }, { "internalType": "uint256", "name": "_startTime", "type": "uint256" }, { "internalType": "uint256", "name": "_endTime", "type": "uint256" }, { "internalType": "bytes32", "name": "hash", "type": "bytes32" }, { "internalType": "bytes", "name": "signature", "type": "bytes" }], "name": "bidNFT", "outputs": [], "stateMutability": "payable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_tokenId", "type": "uint256" }, { "internalType": "bytes32", "name": "hash", "type": "bytes32" }, { "internalType": "bytes", "name": "signature", "type": "bytes" }], "name": "endAuction", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "getApproved", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_tokenId", "type": "uint256" }], "name": "getAuctionInfo", "outputs": [{ "components": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "internalType": "uint256", "name": "basePrice", "type": "uint256" }, { "internalType": "string", "name": "tokenURI", "type": "string" }, { "internalType": "bool", "name": "isAuctionEnded", "type": "bool" }, { "internalType": "uint256", "name": "startTime", "type": "uint256" }, { "internalType": "uint256", "name": "endTime", "type": "uint256" }, { "internalType": "address", "name": "highestBidder", "type": "address" }, { "internalType": "uint256", "name": "highestBid", "type": "uint256" }], "internalType": "struct LazyMinting.AuctionNFT", "name": "", "type": "tuple" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "owner", "type": "address" }, { "internalType": "address", "name": "operator", "type": "address" }], "name": "isApprovedForAll", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "name", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "ownerOf", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "bytes32", "name": "hash", "type": "bytes32" }, { "internalType": "bytes", "name": "signature", "type": "bytes" }], "name": "recoverSigner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "pure", "type": "function" }, { "inputs": [{ "components": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "internalType": "uint256", "name": "price", "type": "uint256" }, { "internalType": "string", "name": "tokenURI", "type": "string" }], "internalType": "struct LazyMinting.NFTVoucher", "name": "voucher", "type": "tuple" }, { "internalType": "bytes32", "name": "hash", "type": "bytes32" }, { "internalType": "bytes", "name": "signature", "type": "bytes" }], "name": "redeem", "outputs": [], "stateMutability": "payable", "type": "function" }, { "inputs": [], "name": "renounceOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "from", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "safeTransferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "from", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "internalType": "bytes", "name": "_data", "type": "bytes" }], "name": "safeTransferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "operator", "type": "address" }, { "internalType": "bool", "name": "approved", "type": "bool" }], "name": "setApprovalForAll", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "bytes4", "name": "interfaceId", "type": "bytes4" }], "name": "supportsInterface", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "symbol", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "tokenURI", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "from", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "transferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "newOwner", "type": "address" }], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }]
+        var myContract, provider, signer, daiWithSigner, getAccounts1, getAddress1
 
         var mentor = document.getElementById("mentor")
         var Hash = document.getElementById("hash")
         var Signature = document.getElementById("signature")
-        var TokenId, Price, TokenURI, messageHash, ChainID, TimeStamp;
+        var BidPrice = document.getElementById("bid_price")
+        var EndAuction = document.getElementById("end_Auction")
+        var TokenId, Price, BasePrice, TokenURI, messageHash, ChainID, TimeStamp, StartTime, EndTime;
 
         $(document).ready(async function () {
             provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-            const getAccounts1 = await provider.send("eth_requestAccounts", []);
+            getAccounts1 = await provider.send("eth_requestAccounts", []);
             signer = provider.getSigner()
+            getAddress1 = await signer.getAddress()
             myContract = new ethers.Contract(smartContractAddress, smartContractAbi, signer);
             contractWithSigner = myContract.connect(signer);
             console.log("getAccounts1 ===>", getAccounts1)
+            console.log("getAddress1 ===>", getAddress1)
         })
 
-        async function createSignature(chainId, contractAddress, tokenId, price, tokenURI, timeStamp) {
+        async function createSignatureForSale(chainId, contractAddress, tokenId, price, tokenURI, timeStamp) {
             const isValidContractAddress = ethers.utils.isAddress(contractAddress);
             if (isValidContractAddress && smartContractAddress == contractAddress) {
                 try {
@@ -103,6 +116,40 @@
             }
         }
 
+        async function createSignatureForAuction(chainId, contractAddress, tokenId, basePrice, tokenURI, startTime, endTime) {
+            const isValidContractAddress = ethers.utils.isAddress(contractAddress);
+            if (isValidContractAddress && smartContractAddress == contractAddress) {
+                try {
+                    let tupleMessage = ethers.utils.solidityPack(['address', 'uint256', 'address', 'uint256', 'uint256', 'string', 'uint256', 'uint256'], [getAddress1, chainId, contractAddress, tokenId.toString(), basePrice.toString(), tokenURI, startTime, endTime]);
+                    messageHash = ethers.utils.keccak256(tupleMessage);
+                    let messageBytes = ethers.utils.arrayify(messageHash);
+                    signature = await signer.signMessage(messageBytes);
+                    TokenId = tokenId;
+                    BasePrice = basePrice.toString();
+                    TokenURI = tokenURI;
+                    Hash = messageHash;
+                    Signature = signature;
+                    ChainID = chainId.toString();
+                    StartTime = Math.floor(Date.now() / 1000) + startTime;
+                    EndTime = Math.floor(Date.now() / 1000) + endTime;
+                    console.log("contractAddress ===>", contractAddress)
+                    console.log("TokenId ===>", TokenId)
+                    console.log("Price ===>", Price)
+                    console.log("TokenURI ===>", TokenURI)
+                    console.log("ChainId ===>", chainId)
+                    console.log("Hash ===>", Hash)
+                    console.log("Signature ===>", Signature)
+                    console.log("StartTime ===>", StartTime)
+                    console.log("EndTime ===>", EndTime)
+                } catch (error) {
+                    console.log(error.message)
+                }
+            } else {
+                console.log("Invalid contract address");
+                return false;
+            }
+        }
+
         async function redeem() {
             if (window.ethereum) {
                 const isCurrentWalletConnectedResponse = await isCurrentWalletConnected();
@@ -125,6 +172,87 @@
                             } else {
                                 alert("Sale is over for this nft");
                             }
+                        } else if (Signature == "" && Hash == "") {
+                            alert("Signature/hash is empty");
+                        } else {
+                            alert("Invalid signature/hash");
+                        }
+                        console.log("getAccounts3 ===>", getAccounts3)
+                    } else {
+                        console.log("Wrong network selected");
+                    }
+                } else {
+                    await connectWallet();
+                }
+            }
+        }
+
+        async function bidNFT() {
+            if (window.ethereum) {
+                const isCurrentWalletConnectedResponse = await isCurrentWalletConnected();
+                if (isCurrentWalletConnectedResponse) {
+                    await switchWallet()
+                    const getAccounts3 = await provider.send("eth_requestAccounts", [])
+                    const getAddress1 = await signer.getAddress()
+                    console.log("getAddress1 ===>", getAddress1)
+                    console.log("Hash ===>", Hash)
+                    console.log("Signature ===>", Signature)
+                    // const { chainId } = await provider.getNetwork()
+                    // console.log("chainId ===>", chainId)
+                    if (ChainID.toString() === "80001") {
+                        if (signature == Signature && messageHash == Hash) {
+                            if (Math.floor(Date.now() / 1000) >= StartTime && Math.floor(Date.now() / 1000) <= EndTime) {
+                                const auctionInfo = await myContract.getAuctionInfo(TokenId);
+                                console.log("highestBid:", (auctionInfo.highestBid).toNumber());
+                                console.log("await myContract.getAuctionInfo(TokenId).highestBid ===>", await myContract.getAuctionInfo(TokenId))
+                                if ((auctionInfo.highestBid).toNumber() == 0) {
+                                    console.log("BasePrice ===>", BasePrice.toString())
+                                    myContract.bidNFT(TokenId, StartTime, EndTime, Hash, Signature, { value: BasePrice.toString() }).then((res) => {
+                                        console.log(res)
+                                    });
+                                } else {
+                                    myContract.bidNFT(TokenId, StartTime, EndTime, Hash, Signature, { value: BidPrice.value.toString() }).then((res) => {
+                                        console.log(res)
+                                    });
+                                }
+                            } else {
+                                alert("Sale is over for this nft / Sale is not started yet");
+                            }
+                        } else if (Signature == "" && Hash == "") {
+                            alert("Signature/hash is empty");
+                        } else {
+                            alert("Invalid signature/hash");
+                        }
+                        console.log("getAccounts3 ===>", getAccounts3)
+                    } else {
+                        console.log("Wrong network selected");
+                    }
+                } else {
+                    await connectWallet();
+                }
+            }
+        }
+
+        async function endAuction() {
+            if (window.ethereum) {
+                const isCurrentWalletConnectedResponse = await isCurrentWalletConnected();
+                if (isCurrentWalletConnectedResponse) {
+                    await switchWallet()
+                    const getAccounts3 = await provider.send("eth_requestAccounts", [])
+                    const getAddress1 = await signer.getAddress()
+                    console.log("getAddress1 ===>", getAddress1)
+                    // const { chainId } = await provider.getNetwork()
+                    // console.log("chainId ===>", chainId)
+                    if (ChainID.toString() === "80001") {
+                        if (signature == Signature && messageHash == Hash) {
+                            if (Math.floor(Date.now() / 1000) > EndTime) {
+                                myContract.endAuction(TokenId, Hash, Signature).then((res) => {
+                                    console.log(res)
+                                });
+                            } else {
+                                alert("Sale is not ended yet");
+                            }
+                            console.log("getAccounts3 ===>", getAccounts3)
                         } else if (Signature == "" && Hash == "") {
                             alert("Signature/hash is empty");
                         } else {
