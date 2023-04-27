@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Lazy Minting</title>
+</head>
+
+<body class="bg-body">
+    <section>
+        <nav class="navbar navbar-light nav-bg">
+        </nav>
+        <div class="container justify-content-center align-items-center py-2">
+            <div class="row justify-content-center mt-3 pt-3">
+                <div class="col-md-6 ">
+
+                    <div class="card p-5 m-2 mt-lg-5">
+                        <form>
+                            <div class="row justify-content-center mt-2">
+                                <div class="col-6 token text-center">
+                                    Lazy Minting
+                                </div>
+                            </div>
+
+                            <div class="input-group mb-3 mt-4">
+                                <div class="form-group col-lg-12">
+                                    <label for="inputEmail4" class="mail">Sign Off Chain Signature</label>
+                                    <input type="text" id="hash" class="form-control" type="text" placeholder="hash">
+                                    </input>
+                                    <input type="text" id="signature" class="form-control" type="text"
+                                        placeholder="signature"> </input>
+                                </div>
+                            </div>
+                            <div class=" container">
+                                <button type="button" class="btn btn-outline-info" onclick="redeem()">Buy
+                                    NFT</button>
+                            </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </section>
+
+    <script>
+
+        var smartContractAddress = '0x617E23a822EcD5100829B98D63846D585394c0EF';
+        var smartContractAbi = [{ "inputs": [], "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "approved", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "Approval", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "operator", "type": "address" }, { "indexed": false, "internalType": "bool", "name": "approved", "type": "bool" }], "name": "ApprovalForAll", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": false, "internalType": "address", "name": "buyer", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "indexed": true, "internalType": "string", "name": "tokenURI", "type": "string" }, { "indexed": true, "internalType": "uint256", "name": "price", "type": "uint256" }], "name": "Mint", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "previousOwner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "newOwner", "type": "address" }], "name": "OwnershipTransferred", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "from", "type": "address" }, { "indexed": true, "internalType": "address", "name": "to", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "Transfer", "type": "event" }, { "inputs": [{ "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "approve", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "owner", "type": "address" }], "name": "balanceOf", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "getApproved", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "owner", "type": "address" }, { "internalType": "address", "name": "operator", "type": "address" }], "name": "isApprovedForAll", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "name", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "ownerOf", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "bytes32", "name": "hash", "type": "bytes32" }, { "internalType": "bytes", "name": "signature", "type": "bytes" }], "name": "recoverSigner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "pure", "type": "function" }, { "inputs": [{ "components": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "internalType": "uint256", "name": "price", "type": "uint256" }, { "internalType": "string", "name": "tokenURI", "type": "string" }], "internalType": "struct LazyMinting.NFTVoucher", "name": "voucher", "type": "tuple" }, { "internalType": "bytes32", "name": "hash", "type": "bytes32" }, { "internalType": "bytes", "name": "signature", "type": "bytes" }], "name": "redeem", "outputs": [], "stateMutability": "payable", "type": "function" }, { "inputs": [], "name": "renounceOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "from", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "safeTransferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "from", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "internalType": "bytes", "name": "_data", "type": "bytes" }], "name": "safeTransferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "operator", "type": "address" }, { "internalType": "bool", "name": "approved", "type": "bool" }], "name": "setApprovalForAll", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "bytes4", "name": "interfaceId", "type": "bytes4" }], "name": "supportsInterface", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "symbol", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "tokenURI", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "from", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "transferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "newOwner", "type": "address" }], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }]
+        var myContract, provider, signer, daiWithSigner;
+
+        var mentor = document.getElementById("mentor")
+        var Hash = document.getElementById("hash")
+        var Signature = document.getElementById("signature")
+        var TokenId, Price, TokenURI, messageHash, ChainID, TimeStamp;
+
+        $(document).ready(async function () {
+            provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+            const getAccounts1 = await provider.send("eth_requestAccounts", []);
+            signer = provider.getSigner()
+            myContract = new ethers.Contract(smartContractAddress, smartContractAbi, signer);
+            contractWithSigner = myContract.connect(signer);
+            console.log("getAccounts1 ===>", getAccounts1)
+        })
+
+        async function createSignature(chainId, contractAddress, tokenId, price, tokenURI, timeStamp) {
+            const isValidContractAddress = ethers.utils.isAddress(contractAddress);
+            if (isValidContractAddress && smartContractAddress == contractAddress) {
+                try {
+                    let tupleMessage = ethers.utils.solidityPack(['uint256', 'address', 'uint256', 'uint256', 'string'], [chainId, contractAddress, tokenId.toString(), price.toString(), tokenURI]);
+                    messageHash = ethers.utils.keccak256(tupleMessage);
+                    let messageBytes = ethers.utils.arrayify(messageHash);
+                    signature = await signer.signMessage(messageBytes);
+                    TokenId = tokenId;
+                    Price = price.toString();
+                    TokenURI = tokenURI;
+                    Hash = messageHash;
+                    Signature = signature;
+                    ChainID = chainId.toString();
+                    TimeStamp = Math.floor(Date.now() / 1000) + timeStamp
+                    console.log("contractAddress ===>", contractAddress)
+                    console.log("TokenId ===>", TokenId)
+                    console.log("Price ===>", Price)
+                    console.log("TokenURI ===>", TokenURI)
+                    console.log("ChainId ===>", chainId)
+                    console.log("Hash ===>", Hash)
+                    console.log("Signature ===>", Signature)
+                    console.log("TimeStamp ===>", TimeStamp)
+                    console.log("Date.now() ===>", Math.floor(Date.now() / 1000))
+                } catch (error) {
+                    console.log(error.message)
+                }
+            } else {
+                console.log("Invalid contract address");
+                return false;
+            }
+        }
+
+        async function redeem() {
+            if (window.ethereum) {
+                const isCurrentWalletConnectedResponse = await isCurrentWalletConnected();
+                if (isCurrentWalletConnectedResponse) {
+                    await switchWallet()
+                    const getAccounts3 = await provider.send("eth_requestAccounts", [])
+                    const getAddress1 = await signer.getAddress()
+                    console.log("getAddress1 ===>", getAddress1)
+                    console.log("Hash ===>", Hash)
+                    console.log("Signature ===>", Signature)
+                    console.log(getAccounts3, [ChainID, TokenId, Price, TokenURI], Hash, Signature)
+                    // const { chainId } = await provider.getNetwork()
+                    // console.log("chainId ===>", chainId)
+                    if (ChainID.toString() === "80001") {
+                        if (signature == Signature && messageHash == Hash) {
+                            if (Math.floor(Date.now() / 1000) <= TimeStamp) {
+                                myContract.redeem([TokenId, Price.toString(), TokenURI], Hash, Signature, { value: Price.toString() }).then((res) => {
+                                    console.log(res)
+                                });
+                            } else {
+                                alert("Sale is over for this nft");
+                            }
+                        } else if (Signature == "" && Hash == "") {
+                            alert("Signature/hash is empty");
+                        } else {
+                            alert("Invalid signature/hash");
+                        }
+                        console.log("getAccounts3 ===>", getAccounts3)
+                    } else {
+                        console.log("Wrong network selected");
+                    }
+                } else {
+                    await connectWallet();
+                }
+            }
+        }
+
+        const switchWallet = async () => {
+            const chainId = 80001
+            console.log(window.ethereum.networkVersion)
+            if (window.ethereum.networkVersion !== chainId) {
+                try {
+                    var hex_chainId = ethers.utils.hexValue(chainId);
+                    console.log('hex_chainId :' + hex_chainId);
+                    await window.ethereum.request({
+                        method: 'wallet_switchEthereumChain',
+                        params: [{ chainId: hex_chainId }]
+                    });
+                } catch (err) {
+                    // This error code indicates that the chain has not been added to MetaMask
+                    if (err.code === 4902) {
+                        await window.ethereum.request({
+                            method: 'wallet_addEthereumChain',
+                            params: [
+                                {
+                                    chainName: 'Mumbai',
+                                    chainId: ethers.utils.hexlify(chainId),
+                                    nativeCurrency: { name: 'Mumbai', decimals: 18, symbol: 'MATIC' },
+                                    rpcUrls: ['https://polygon-mumbai.infura.io/v3/4458cf4d1689497b9a38b1d6bbf05e78']
+                                }
+                            ]
+                        });
+                    }
+                }
+            }
+        }
+
+        const isCurrentWalletConnected = async () => {
+            if (window.ethereum) {
+                try {
+                    const addressArray = await window.ethereum.request({
+                        method: "eth_accounts",
+                    });
+                    if (addressArray.length > 0) {
+                        return addressArray[0];
+                    } else {
+                        return false;
+                    }
+                } catch (err) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        };
+
+
+        const connectWallet = async () => {
+            if (window.ethereum) {
+                try {
+                    const addressArray = await window.ethereum.request({
+                        method: "eth_requestAccounts",
+                    });
+                    const obj = {
+                        status: "👆🏽 Write a message in the text-field above.",
+                        address: addressArray[0],
+                    };
+                    return obj;
+                } catch (err) {
+                    return {
+                        address: "",
+                        status: "😥 " + err.message,
+                    };
+                }
+            } else {
+                showToast({
+                    message: ` <a target="_blank" rel="noreferrer" href="https://metamask.io/download.html">
+            You must install Metamask, a virtual Ethereum wallet, in your
+            browser.
+            </a>`, type: "error"
+                });
+                return {
+                    address: "",
+                    status: "",
+                };
+            }
+        };
+
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
