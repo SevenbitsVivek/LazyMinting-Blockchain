@@ -9,11 +9,16 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>Lazy Minting</title>
+    <title>Lazy Minting NFT's</title>
 </head>
 
 <body class="bg-body">
     <section>
+        <div class="row justify-content-center mt-2">
+            <div class="col-6 token text-center d-flex justify-content-center">
+                <span class="font-weight-bold">Lazy Minting NFT's</span>
+            </div>
+        </div>
         <nav class="navbar navbar-light nav-bg">
         </nav>
         <div class="container justify-content-center align-items-center py-2">
@@ -23,40 +28,78 @@
                     <div class="card p-5 m-2 mt-lg-5">
                         <form>
                             <div class="row justify-content-center mt-2">
-                                <div class="col-6 token text-center">
-                                    Lazy Minting
-                                </div>
+                                <span class="font-weight-bold">Buy NFT's</span>
                             </div>
 
                             <div class="input-group mb-3 mt-4">
                                 <div class="form-group col-lg-12">
-                                    <label for="inputEmail4" class="mail">Sign Off Chain Signature</label>
+                                    <label for="inputEmail4" class="mail">Hash</label>
                                     <input type="text" id="hash" class="form-control" type="text" placeholder="hash">
-                                    </input>
+                                    </input><br>
+                                    <label for="inputEmail4" class="mail">Signature</label>
                                     <input type="text" id="signature" class="form-control" type="text"
                                         placeholder="signature"> </input>
                                 </div>
-                                <div class=" container">
+                                <div class="container d-flex justify-content-center">
                                     <button type="button" class="btn btn-outline-info" onclick="buyNFT()">Buy
                                         NFT</button>
                                 </div>
                             </div>
-                            <input type="Number" id="bid_price" class="form-control" type="Number"
-                                placeholder="bid_price"> </input>
-                            <div class=" container">
-                                <button type="button" class="btn btn-outline-info" onclick="bidNFT()">Bid
-                                    NFT</button>
+                        </form>
+                    </div>
+
+                    <div class="card p-5 m-2 mt-lg-5">
+                        <form>
+                            <div class="row justify-content-center mt-2">
+                                <span class="font-weight-bold">Bid NFT's</span>
                             </div>
-                            <input type="Number" id="claim_NFT" class="form-control" type="Number"
-                                placeholder="tokenId"> </input>
-                            <div class=" container">
-                                <button type="button" class="btn btn-outline-info" onclick="claimNFT()">Claim NFT</button>
+
+                            <div class="input-group mb-3 mt-4">
+                                <div class="form-group col-lg-12">
+                                    <label for="inputEmail4" class="mail">Hash</label>
+                                    <input type="text" id="hash" class="form-control" type="text" placeholder="hash">
+                                    </input><br>
+                                    <label for="inputEmail4" class="mail">Signature</label>
+                                    <input type="text" id="signature" class="form-control" type="text"
+                                        placeholder="signature"> </input><br>
+                                    <label for="inputEmail4" class="mail">Bid Price</label>
+                                    <input type="Number" id="bid_price" class="form-control" type="Number"
+                                        placeholder="bid_price"> </input>
+                                </div>
+                            </div>
+                            <div class="container d-flex justify-content-center">
+                                <button type="button" class="btn btn-outline-info" onclick="bidNFT()">Bid NFT</button>
+                            </div>
+                    </div>
+                    </form>
+
+                    <div class="card p-5 m-2 mt-lg-5">
+                        <form>
+                            <div class="row justify-content-center mt-2">
+                                <span class="font-weight-bold">Claim NFT's</span>
+                            </div>
+
+                            <div class="input-group mb-3 mt-4">
+                                <div class="form-group col-lg-12">
+                                    <label for="inputEmail4" class="mail">Hash</label>
+                                    <input type="text" id="hash" class="form-control" type="text" placeholder="hash">
+                                    </input><br>
+                                    <label for="inputEmail4" class="mail">Signature</label>
+                                    <input type="text" id="signature" class="form-control" type="text"
+                                        placeholder="signature"> </input><br>
+                                    <label for="inputEmail4" class="mail">Token Id</label>
+                                    <input type="Number" id="claim_NFT" class="form-control" type="Number"
+                                        placeholder="tokenId"> </input>
+                                </div>
+                            </div>
+                            <div class="container d-flex justify-content-center">
+                                <button type="button" class="btn btn-outline-info" onclick="claimNFT()">Claim
+                                    NFT</button>
                             </div>
                     </div>
                     </form>
                 </div>
             </div>
-        </div>
         </div>
     </section>
     <script>
