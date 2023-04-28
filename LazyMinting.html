@@ -265,8 +265,8 @@
                             alert("BidPrice is empty!");
                         } else {
                             if (SignatureForAuction.value === signature && HashForAuction.value === messageHash) {
-                                if (Math.floor(Date.now() / 1000) >= StartTime) {
-                                    if (TokenIdForAuction.value == TokenId) {
+                                if (TokenIdForAuction.value == TokenId) {
+                                    if (Math.floor(Date.now() / 1000) >= StartTime) {
                                         if (Math.floor(Date.now() / 1000) <= EndTime) {
                                             const auctionInfo = await myContract.getAuctionInfo(TokenId);
                                             if ((auctionInfo.highestBid).toNumber() == 0) {
@@ -286,10 +286,10 @@
                                             alert("Sale is over for this nft");
                                         }
                                     } else {
-                                        alert("Invalid tokenId");
+                                        alert("Sale is not started yet");
                                     }
                                 } else {
-                                    alert("Sale is not started yet");
+                                    alert("Invalid tokenId");
                                 }
                             } else {
                                 alert("Invalid signature / hash");
