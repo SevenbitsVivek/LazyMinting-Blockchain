@@ -239,24 +239,28 @@
                     // console.log("chainId ===>", chainId)
                     if (ChainID.toString() === "80001") {
                         if (signature == Signature && messageHash == Hash) {
-                            if (Math.floor(Date.now() / 1000) >= StartTime && Math.floor(Date.now() / 1000) <= EndTime) {
-                                const auctionInfo = await myContract.getAuctionInfo(TokenId);
-                                console.log("highestBid:", (auctionInfo.highestBid).toNumber());
-                                console.log("await myContract.getAuctionInfo(TokenId).highestBid ===>", await myContract.getAuctionInfo(TokenId))
-                                if ((auctionInfo.highestBid).toNumber() == 0) {
-                                    // console.log("BasePrice ===>", BasePrice.toString())
-                                    // BidPrice = BasePrice.toString()
-                                    console.log("BidPrice ===>", BidPrice.toString())
-                                    myContract.bidNFT(TokenId, StartTime, EndTime, Hash, Signature, { value: BasePrice.toString() }).then((res) => {
-                                        console.log(res)
-                                    });
+                            if (Math.floor(Date.now() / 1000) >= StartTime) {
+                                if (Math.floor(Date.now() / 1000) <= EndTime) {
+                                    const auctionInfo = await myContract.getAuctionInfo(TokenId);
+                                    console.log("highestBid:", (auctionInfo.highestBid).toNumber());
+                                    console.log("await myContract.getAuctionInfo(TokenId).highestBid ===>", await myContract.getAuctionInfo(TokenId))
+                                    if ((auctionInfo.highestBid).toNumber() == 0) {
+                                        // console.log("BasePrice ===>", BasePrice.toString())
+                                        // BidPrice = BasePrice.toString()
+                                        console.log("BidPrice ===>", BidPrice.toString())
+                                        myContract.bidNFT(TokenId, StartTime, EndTime, Hash, Signature, { value: BasePrice.toString() }).then((res) => {
+                                            console.log(res)
+                                        });
+                                    } else {
+                                        myContract.bidNFT(TokenId, StartTime, EndTime, Hash, Signature, { value: BidPrice.value.toString() }).then((res) => {
+                                            console.log(res)
+                                        });
+                                    }
                                 } else {
-                                    myContract.bidNFT(TokenId, StartTime, EndTime, Hash, Signature, { value: BidPrice.value.toString() }).then((res) => {
-                                        console.log(res)
-                                    });
+                                    alert("Sale is over for this nft");
                                 }
                             } else {
-                                alert("Sale is over for this nft / Sale is not started yet");
+                                alert("Sale is not started yet");
                             }
                         } else if (Signature == "" && Hash == "") {
                             alert("Signature/hash is empty");
