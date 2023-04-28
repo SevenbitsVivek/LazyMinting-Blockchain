@@ -8,7 +8,7 @@ var port = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, './public/')));
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/LazyMinting.html');
 });
 
 http.listen(port, function () {
