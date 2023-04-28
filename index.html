@@ -50,7 +50,6 @@
                             <div class="row justify-content-center mt-2">
                                 <span class="font-weight-bold">Bid NFT's</span>
                             </div>
-
                             <div class="input-group mb-3 mt-4">
                                 <div class="form-group col-lg-12">
                                     <label for="inputEmail4" class="mail">Hash</label>
@@ -74,7 +73,6 @@
                             <div class="row justify-content-center mt-2">
                                 <span class="font-weight-bold">Claim NFT's</span>
                             </div>
-
                             <div class="input-group mb-3 mt-4">
                                 <div class="form-group col-lg-12">
                                     <label for="inputEmail4" class="mail">Hash</label>
@@ -242,15 +240,14 @@
                             if (Math.floor(Date.now() / 1000) >= StartTime) {
                                 if (Math.floor(Date.now() / 1000) <= EndTime) {
                                     const auctionInfo = await myContract.getAuctionInfo(TokenId);
-                                    console.log("highestBid:", (auctionInfo.highestBid).toNumber());
-                                    console.log("await myContract.getAuctionInfo(TokenId).highestBid ===>", await myContract.getAuctionInfo(TokenId))
                                     if ((auctionInfo.highestBid).toNumber() == 0) {
-                                        // console.log("BasePrice ===>", BasePrice.toString())
-                                        // BidPrice = BasePrice.toString()
-                                        console.log("BidPrice ===>", BidPrice.toString())
-                                        myContract.bidNFT(TokenId, StartTime, EndTime, Hash, Signature, { value: BasePrice.toString() }).then((res) => {
-                                            console.log(res)
-                                        });
+                                        if (BasePrice.toString() === BidPrice.value.toString()) {
+                                            myContract.bidNFT(TokenId, StartTime, EndTime, Hash, Signature, { value: BidPrice.value.toString() }).then((res) => {
+                                                console.log(res)
+                                            });
+                                        } else {
+                                            alert("Invalid BasePrice");
+                                        }
                                     } else {
                                         myContract.bidNFT(TokenId, StartTime, EndTime, Hash, Signature, { value: BidPrice.value.toString() }).then((res) => {
                                             console.log(res)
