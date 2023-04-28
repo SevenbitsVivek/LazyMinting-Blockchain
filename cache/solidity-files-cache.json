@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/home/sevenbits/7 bits/daap's/lazy minting(ERC-721)/contracts/LazyMinting.sol": {
-      "lastModificationDate": 1682682841752,
-      "contentHash": "14a422259a8243cdfa1ff312a2ee935a",
+      "lastModificationDate": 1682690512068,
+      "contentHash": "e4b10ec2ee9b26e80db5c458b2e59adb",
       "sourceName": "contracts/LazyMinting.sol",
       "solcConfig": {
         "version": "0.8.17",

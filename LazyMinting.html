@@ -31,11 +31,12 @@
                             </div>
                             <div class="input-group mb-3 mt-4">
                                 <div class="form-group col-lg-12">
-                                    <label for="inputEmail4" class="mail">Hash</label>
-                                    <input type="text" id="hash" class="form-control" type="text" placeholder="hash">
+                                    <label for="hashForSale" class="mail">Hash</label>
+                                    <input type="text" id="hashForSale" class="form-control" type="text"
+                                        placeholder="hash">
                                     </input><br>
-                                    <label for="inputEmail4" class="mail">Signature</label>
-                                    <input type="text" id="signature" class="form-control" type="text"
+                                    <label for="signatureForSale" class="mail">Signature</label>
+                                    <input type="text" id="signatureForSale" class="form-control" type="text"
                                         placeholder="signature"> </input>
                                 </div>
                                 <div class="container d-flex justify-content-center">
@@ -52,22 +53,26 @@
                             </div>
                             <div class="input-group mb-3 mt-4">
                                 <div class="form-group col-lg-12">
-                                    <label for="inputEmail4" class="mail">Hash</label>
-                                    <input type="text" id="hash" class="form-control" type="text" placeholder="hash">
+                                    <label for="hashForAuction" class="mail">Hash</label>
+                                    <input type="text" id="hashForAuction" class="form-control" type="text"
+                                        placeholder="hash">
                                     </input><br>
-                                    <label for="inputEmail4" class="mail">Signature</label>
-                                    <input type="text" id="signature" class="form-control" type="text"
+                                    <label for="signatureForAuction" class="mail">Signature</label>
+                                    <input type="text" id="signatureForAuction" class="form-control" type="text"
                                         placeholder="signature"> </input><br>
-                                    <label for="inputEmail4" class="mail">Bid Price</label>
-                                    <input type="Number" id="bid_price" class="form-control" type="Number"
-                                        placeholder="bid_price"> </input>
+                                    <label for="tokenIdForAuction" class="mail">Token Id</label>
+                                    <input type="text" id="tokenIdForAuction" class="form-control" type="Number"
+                                        placeholder="tokenId"> </input><br>
+                                    <label for="bidPriceForAuction" class="mail">Bid Price</label>
+                                    <input type="text" id="bidPriceForAuction" class="form-control" type="Number"
+                                        placeholder="bidPrice"> </input>
                                 </div>
                             </div>
                             <div class="container d-flex justify-content-center">
                                 <button type="button" class="btn btn-outline-info" onclick="bidNFT()">Bid NFT</button>
                             </div>
+                        </form>
                     </div>
-                    </form>
                     <div class="card p-5 m-2 mt-lg-5">
                         <form>
                             <div class="row justify-content-center mt-2">
@@ -75,14 +80,15 @@
                             </div>
                             <div class="input-group mb-3 mt-4">
                                 <div class="form-group col-lg-12">
-                                    <label for="inputEmail4" class="mail">Hash</label>
-                                    <input type="text" id="hash" class="form-control" type="text" placeholder="hash">
+                                    <label for="hashForClaim" class="mail">Hash</label>
+                                    <input type="text" id="hashForClaim" class="form-control" type="text"
+                                        placeholder="hash">
                                     </input><br>
-                                    <label for="inputEmail4" class="mail">Signature</label>
-                                    <input type="text" id="signature" class="form-control" type="text"
+                                    <label for="signatureForClaim" class="mail">Signature</label>
+                                    <input type="text" id="signatureForClaim" class="form-control" type="text"
                                         placeholder="signature"> </input><br>
-                                    <label for="inputEmail4" class="mail">Token Id</label>
-                                    <input type="Number" id="claim_NFT" class="form-control" type="Number"
+                                    <label for="tokenIdForClaim" class="mail">Token Id</label>
+                                    <input type="Number" id="tokenIdForClaim" class="form-control" type="Number"
                                         placeholder="tokenId"> </input>
                                 </div>
                             </div>
@@ -97,16 +103,20 @@
         </div>
     </section>
     <script>
-        var smartContractAddress = '0x3152DCE728E5C5Fab2ae91f9Bf509e6dBd843f1B';
+        var smartContractAddress = '0x8ef3232Dc51CBd723f7a0A6Da46e21F86F9361f7';
         var smartContractAbi = [{ "inputs": [], "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "approved", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "Approval", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "operator", "type": "address" }, { "indexed": false, "internalType": "bool", "name": "approved", "type": "bool" }], "name": "ApprovalForAll", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "indexed": true, "internalType": "string", "name": "tokenURI", "type": "string" }, { "indexed": true, "internalType": "uint256", "name": "price", "type": "uint256" }], "name": "Mint", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "uint256", "name": "_tokenId", "type": "uint256" }, { "indexed": false, "internalType": "address", "name": "_bidder", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "_bidAmount", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "_startTime", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "_endTime", "type": "uint256" }], "name": "NftBidded", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "previousOwner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "newOwner", "type": "address" }], "name": "OwnershipTransferred", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "from", "type": "address" }, { "indexed": true, "internalType": "address", "name": "to", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "Transfer", "type": "event" }, { "inputs": [{ "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "approve", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "owner", "type": "address" }], "name": "balanceOf", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_tokenId", "type": "uint256" }, { "internalType": "uint256", "name": "_startTime", "type": "uint256" }, { "internalType": "uint256", "name": "_endTime", "type": "uint256" }, { "internalType": "string", "name": "_tokenURI", "type": "string" }, { "internalType": "bytes32", "name": "hash", "type": "bytes32" }, { "internalType": "bytes", "name": "signature", "type": "bytes" }], "name": "bidNFT", "outputs": [], "stateMutability": "payable", "type": "function" }, { "inputs": [{ "components": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "internalType": "uint256", "name": "price", "type": "uint256" }, { "internalType": "string", "name": "tokenURI", "type": "string" }], "internalType": "struct LazyMinting.SaleNFTVoucher", "name": "voucher", "type": "tuple" }, { "internalType": "bytes32", "name": "hash", "type": "bytes32" }, { "internalType": "bytes", "name": "signature", "type": "bytes" }], "name": "buyNFT", "outputs": [], "stateMutability": "payable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_tokenId", "type": "uint256" }, { "internalType": "bytes32", "name": "hash", "type": "bytes32" }, { "internalType": "bytes", "name": "signature", "type": "bytes" }], "name": "claimNFT", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "getApproved", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_tokenId", "type": "uint256" }], "name": "getAuctionInfo", "outputs": [{ "components": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "internalType": "uint256", "name": "basePrice", "type": "uint256" }, { "internalType": "string", "name": "tokenURI", "type": "string" }, { "internalType": "bool", "name": "isAuctionEnded", "type": "bool" }, { "internalType": "uint256", "name": "startTime", "type": "uint256" }, { "internalType": "uint256", "name": "endTime", "type": "uint256" }, { "internalType": "address", "name": "highestBidder", "type": "address" }, { "internalType": "uint256", "name": "highestBid", "type": "uint256" }], "internalType": "struct LazyMinting.AuctionNFTVoucher", "name": "", "type": "tuple" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "owner", "type": "address" }, { "internalType": "address", "name": "operator", "type": "address" }], "name": "isApprovedForAll", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "name", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "ownerOf", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "renounceOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "from", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "safeTransferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "from", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "internalType": "bytes", "name": "_data", "type": "bytes" }], "name": "safeTransferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "operator", "type": "address" }, { "internalType": "bool", "name": "approved", "type": "bool" }], "name": "setApprovalForAll", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "bytes4", "name": "interfaceId", "type": "bytes4" }], "name": "supportsInterface", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "symbol", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "tokenURI", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "from", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "transferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "newOwner", "type": "address" }], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }];
         var myContract, provider, signer, daiWithSigner, getAccounts, getAddress
 
-        var mentor = document.getElementById("mentor")
-        var Hash = document.getElementById("hash")
-        var Signature = document.getElementById("signature")
-        var BidPrice = document.getElementById("bid_price")
-        var ClaimNFt = document.getElementById("claim_NFT")
-        var TokenId, Price, BasePrice, TokenURI, messageHash, ChainID, TimeStamp, StartTime, EndTime;
+        var HashForSale = document.getElementById("hashForSale")
+        var SignatureForSale = document.getElementById("signatureForSale")
+        var HashForAuction = document.getElementById("hashForAuction")
+        var SignatureForAuction = document.getElementById("signatureForAuction")
+        var HashForClaim = document.getElementById("hashForClaim")
+        var SignatureForClaim = document.getElementById("signatureForClaim")
+        var BidPriceForAuction = document.getElementById("bidPriceForAuction")
+        var TokenIdForAuction = document.getElementById("tokenIdForAuction")
+        var TokenIdForClaim = document.getElementById("tokenIdForClaim")
+        var TokenId, Price, BasePrice, TokenURI, messageHash, signature, ChainID, TimeStamp, StartTime, EndTime;
 
         $(document).ready(async function () {
             provider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -131,17 +141,17 @@
                         TokenId = tokenId;
                         Price = price.toString();
                         TokenURI = tokenURI;
-                        Hash = messageHash;
-                        Signature = signature;
-                        ChainID = chainId.toString();
+                        messageHash = messageHash;
+                        signature = signature;
+                        ChainID = chainId
                         TimeStamp = Math.floor(Date.now() / 1000) + timeStamp;
                         console.log("contractAddress ===>", contractAddress)
                         console.log("TokenId ===>", TokenId)
                         console.log("Price ===>", Price)
                         console.log("TokenURI ===>", TokenURI)
                         console.log("ChainId ===>", chainId)
-                        console.log("Hash ===>", Hash)
-                        console.log("Signature ===>", Signature)
+                        console.log("Hash ===>", messageHash)
+                        console.log("Signature ===>", signature)
                         console.log("TimeStamp ===>", TimeStamp)
                         console.log("Date.now() ===>", Math.floor(Date.now() / 1000))
                     } else {
@@ -168,9 +178,9 @@
                         TokenId = tokenId;
                         BasePrice = basePrice.toString();
                         TokenURI = tokenURI;
-                        Hash = messageHash;
-                        Signature = signature;
-                        ChainID = chainId.toString();
+                        messageHash = messageHash;
+                        signature = signature;
+                        ChainID = chainId
                         StartTime = Math.floor(Date.now() / 1000) + startTime;
                         EndTime = Math.floor(Date.now() / 1000) + endTime;
                         console.log("contractAddress ===>", contractAddress)
@@ -178,8 +188,8 @@
                         console.log("BasePrice ===>", BasePrice)
                         console.log("TokenURI ===>", TokenURI)
                         console.log("ChainId ===>", chainId)
-                        console.log("Hash ===>", Hash)
-                        console.log("Signature ===>", Signature)
+                        console.log("Hash ===>", messageHash)
+                        console.log("Signature ===>", signature)
                         console.log("StartTime ===>", StartTime)
                         console.log("EndTime ===>", EndTime)
                     } else {
@@ -202,32 +212,37 @@
                     const getAccounts = await provider.send("eth_requestAccounts", [])
                     const getAddress = await signer.getAddress()
                     console.log("getAddress ===>", getAddress)
-                    console.log("Hash ===>", Hash)
-                    console.log("Signature ===>", Signature)
-                    console.log(getAccounts, [ChainID, TokenId, Price, TokenURI], Hash, Signature)
+                    console.log("Hash ===>", messageHash)
+                    console.log("Signature ===>", signature)
+                    console.log(getAccounts, [ChainID, TokenId, Price, TokenURI], messageHash, signature)
                     // const { chainId } = await provider.getNetwork()
                     // console.log("chainId ===>", chainId)
-                    if (ChainID.toString() === "80001") {
-                        if (signature == Signature && messageHash == Hash) {
-                            if (Math.floor(Date.now() / 1000) <= TimeStamp) {
-                                myContract.buyNFT([TokenId, Price.toString(), TokenURI], Hash, Signature, { value: Price.toString() }).then((res) => {
-                                    console.log(res)
-                                });
-                            } else {
-                                alert("Sale is over for this nft");
-                            }
-                        } else if (Signature == "" && Hash == "") {
-                            alert("Signature/hash is empty");
+                    if (ChainID === 80001) {
+                        if (HashForSale.value == "" && SignatureForSale.value == "") {
+                            alert("All fields are empty");
+                        } else if (HashForSale.value == "") {
+                            alert("Hash is empty!");
+                        } else if (SignatureForSale.value == "") {
+                            alert("Signature is empty!");
                         } else {
-                            alert("Invalid signature/hash");
+                            if (SignatureForSale.value === signature && HashForSale.value === messageHash) {
+                                if (Math.floor(Date.now() / 1000) <= TimeStamp) {
+                                    myContract.buyNFT([TokenId, Price.toString(), TokenURI], messageHash, signature, { value: Price.toString() }).then((res) => {
+                                        console.log(res)
+                                    });
+                                } else {
+                                    alert("Sale is over for this nft");
+                                }
+                            } else {
+                                alert("Invalid signature / hash");
+                            }
                         }
-                        console.log("getAccounts3 ===>", getAccounts)
                     } else {
                         console.log("Wrong network selected");
                     }
-                } else {
-                    await connectWallet();
                 }
+            } else {
+                await connectWallet();
             }
         }
 
@@ -238,47 +253,57 @@
                     await switchWallet()
                     const getAccounts = await provider.send("eth_requestAccounts", [])
                     const getAddress = await signer.getAddress()
-                    console.log("getAddress ===>", getAddress)
-                    console.log("Hash ===>", Hash)
-                    console.log("Signature ===>", Signature)
                     // const { chainId } = await provider.getNetwork()
                     // console.log("chainId ===>", chainId)
-                    if (ChainID.toString() === "80001") {
-                        if (signature === Signature && messageHash === Hash) {
-                            if (Math.floor(Date.now() / 1000) >= StartTime) {
-                                if (Math.floor(Date.now() / 1000) <= EndTime) {
-                                    const auctionInfo = await myContract.getAuctionInfo(TokenId);
-                                    if ((auctionInfo.highestBid).toNumber() === 0) {
-                                        if (BasePrice.toString() === BidPrice.value.toString()) {
-                                            myContract.bidNFT(TokenId, StartTime, EndTime, TokenURI, Hash, Signature, { value: BidPrice.value.toString() }).then((res) => {
-                                                console.log(res)
-                                            });
+                    if (ChainID === 80001) {
+                        if (HashForAuction.value == "" && SignatureForAuction.value == "" && BidPriceForAuction.value == "" && TokenIdForAuction.value == "") {
+                            alert("All fields are empty");
+                        } else if (HashForAuction.value == "") {
+                            alert("Hash is empty!");
+                        } else if (SignatureForAuction.value == "") {
+                            alert("Signature is empty!");
+                        } else if (BidPriceForAuction.value == "") {
+                            alert("BidPrice is empty!");
+                        } else if (TokenIdForAuction.value == "") {
+                            alert("TokenId is empty!");
+                        } else {
+                            if (SignatureForAuction.value === signature && HashForAuction.value === messageHash) {
+                                if (Math.floor(Date.now() / 1000) >= StartTime) {
+                                    if (TokenIdForAuction.value == TokenId) {
+                                        if (Math.floor(Date.now() / 1000) <= EndTime) {
+                                            const auctionInfo = await myContract.getAuctionInfo(TokenId);
+                                            if ((auctionInfo.highestBid).toNumber() == 0) {
+                                                if (BasePrice.toString() === BidPriceForAuction.value.toString()) {
+                                                    myContract.bidNFT(TokenId, StartTime, EndTime, TokenURI, messageHash, signature, { value: BidPriceForAuction.value.toString() }).then((res) => {
+                                                        console.log(res)
+                                                    });
+                                                } else {
+                                                    alert("Invalid BasePrice");
+                                                }
+                                            } else {
+                                                myContract.bidNFT(TokenId, StartTime, EndTime, TokenURI, messageHash, signature, { value: BidPriceForAuction.value.toString() }).then((res) => {
+                                                    console.log(res)
+                                                });
+                                            }
                                         } else {
-                                            alert("Invalid BasePrice");
+                                            alert("Sale is over for this nft");
                                         }
                                     } else {
-                                        myContract.bidNFT(TokenId, StartTime, EndTime, TokenURI, Hash, Signature, { value: BidPrice.value.toString() }).then((res) => {
-                                            console.log(res)
-                                        });
+                                        alert("Invalid tokenId");
                                     }
                                 } else {
-                                    alert("Sale is over for this nft");
+                                    alert("Sale is not started yet");
                                 }
                             } else {
-                                alert("Sale is not started yet");
+                                alert("Invalid signature / hash");
                             }
-                        } else if (Signature === "" && Hash === "") {
-                            alert("Signature/hash is empty");
-                        } else {
-                            alert("Invalid signature/hash");
                         }
-                        console.log("getAccounts3 ===>", getAccounts)
                     } else {
                         console.log("Wrong network selected");
                     }
-                } else {
-                    await connectWallet();
                 }
+            } else {
+                await connectWallet();
             }
         }
 
@@ -292,21 +317,32 @@
                     console.log("getAddress ===>", getAddress)
                     // const { chainId } = await provider.getNetwork()
                     // console.log("chainId ===>", chainId)
-                    if (ChainID.toString() === "80001") {
-                        if (signature === Signature && messageHash === Hash) {
-                            if (Math.floor(Date.now() / 1000) > EndTime) {
-                                myContract.claimNFT(TokenId, Hash, Signature).then((res) => {
-                                    console.log(res)
-                                });
-                            } else {
-                                alert("Sale is not ended yet");
-                            }
-                        } else if (Signature === "" && Hash === "") {
-                            alert("Signature/hash is empty");
+                    if (ChainID === 80001) {
+                        if (HashForClaim.value == "" && SignatureForClaim.value == "" && TokenIdForClaim.value == "") {
+                            alert("All fields are empty");
+                        } else if (HashForClaim.value == "") {
+                            alert("Hash is empty!");
+                        } else if (SignatureForClaim.value == "") {
+                            alert("Signature is empty!");
+                        } else if (TokenIdForClaim.value == "") {
+                            alert("TokenId is empty!");
                         } else {
-                            alert("Invalid signature/hash");
+                            if (SignatureForClaim.value === signature && HashForClaim.value === messageHash) {
+                                if (TokenIdForClaim.value == TokenId) {
+                                    if (Math.floor(Date.now() / 1000) > EndTime) {
+                                        myContract.claimNFT(TokenId, messageHash, signature).then((res) => {
+                                            console.log(res)
+                                        });
+                                    } else {
+                                        alert("Sale is not ended yet");
+                                    }
+                                } else {
+                                    alert("Invalid tokenId");
+                                }
+                            } else {
+                                alert("Invalid signature / hash");
+                            }
                         }
-                        console.log("getAccounts3 ===>", getAccounts)
                     } else {
                         console.log("Wrong network selected");
                     }
