@@ -175,7 +175,7 @@
                         EndTime = Math.floor(Date.now() / 1000) + endTime;
                         console.log("contractAddress ===>", contractAddress)
                         console.log("TokenId ===>", TokenId)
-                        console.log("Price ===>", Price)
+                        console.log("BasePrice ===>", BasePrice)
                         console.log("TokenURI ===>", TokenURI)
                         console.log("ChainId ===>", chainId)
                         console.log("Hash ===>", Hash)
@@ -250,7 +250,7 @@
                                     const auctionInfo = await myContract.getAuctionInfo(TokenId);
                                     if ((auctionInfo.highestBid).toNumber() == 0) {
                                         if (BasePrice.toString() === BidPrice.value.toString()) {
-                                            myContract.bidNFT(TokenId, StartTime, EndTime, Hash, Signature, TokenURI, { value: BidPrice.value.toString() }).then((res) => {
+                                            myContract.bidNFT(TokenId, StartTime, EndTime, TokenURI, Hash, Signature, { value: BidPrice.value.toString() }).then((res) => {
                                                 console.log(res)
                                             });
                                         } else {
