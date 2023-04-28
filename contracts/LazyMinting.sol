@@ -65,8 +65,9 @@ contract LazyMinting is  ERC721URIStorage, Ownable, ReentrancyGuard{
         emit Mint(voucher.tokenId, voucher.tokenURI, voucher.price);
     }
 
-    function bidNFT(uint256 _tokenId, uint256 _startTime, uint256 _endTime, bytes32 hash, bytes memory signature) nonReentrant external payable {
+    function bidNFT(uint256 _tokenId, uint256 _startTime, uint256 _endTime, string memory _tokenURI, bytes32 hash, bytes memory signature) nonReentrant external payable {
         require(msg.value > 0 && _startTime > 0 && _endTime > 0, "Invalid parameters");
+        require(bytes(_tokenURI).length > 0, "Invalid TokenURI");  
         require(
             recoverSigner(hash, signature) == owner(),
             "Address is not authorized"
@@ -83,6 +84,7 @@ contract LazyMinting is  ERC721URIStorage, Ownable, ReentrancyGuard{
         address previousHighestBidder = auctionNFTVoucher[_tokenId].highestBidder;
         auctionNFTVoucher[_tokenId].startTime = _startTime;
         auctionNFTVoucher[_tokenId].endTime = _endTime;
+        auctionNFTVoucher[_tokenId].tokenURI = _tokenURI;
         if (msg.value > previousHighestBid) {
             if(!isBidded[msg.sender][_tokenId]) {
                 isBidded[msg.sender][_tokenId] = true;

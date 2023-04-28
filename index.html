@@ -97,8 +97,8 @@
         </div>
     </section>
     <script>
-        var smartContractAddress = '0x7Cf672bfb11fC316a13Fa69581883B991911a860';
-        var smartContractAbi = [{ "inputs": [], "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "approved", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "Approval", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "operator", "type": "address" }, { "indexed": false, "internalType": "bool", "name": "approved", "type": "bool" }], "name": "ApprovalForAll", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "indexed": true, "internalType": "string", "name": "tokenURI", "type": "string" }, { "indexed": true, "internalType": "uint256", "name": "price", "type": "uint256" }], "name": "Mint", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "uint256", "name": "_tokenId", "type": "uint256" }, { "indexed": false, "internalType": "address", "name": "_bidder", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "_bidAmount", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "_startTime", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "_endTime", "type": "uint256" }], "name": "NftBidded", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "previousOwner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "newOwner", "type": "address" }], "name": "OwnershipTransferred", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "from", "type": "address" }, { "indexed": true, "internalType": "address", "name": "to", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "Transfer", "type": "event" }, { "inputs": [{ "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "approve", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "owner", "type": "address" }], "name": "balanceOf", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_tokenId", "type": "uint256" }, { "internalType": "uint256", "name": "_startTime", "type": "uint256" }, { "internalType": "uint256", "name": "_endTime", "type": "uint256" }, { "internalType": "bytes32", "name": "hash", "type": "bytes32" }, { "internalType": "bytes", "name": "signature", "type": "bytes" }], "name": "bidNFT", "outputs": [], "stateMutability": "payable", "type": "function" }, { "inputs": [{ "components": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "internalType": "uint256", "name": "price", "type": "uint256" }, { "internalType": "string", "name": "tokenURI", "type": "string" }], "internalType": "struct LazyMinting.SaleNFTVoucher", "name": "voucher", "type": "tuple" }, { "internalType": "bytes32", "name": "hash", "type": "bytes32" }, { "internalType": "bytes", "name": "signature", "type": "bytes" }], "name": "buyNFT", "outputs": [], "stateMutability": "payable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_tokenId", "type": "uint256" }, { "internalType": "bytes32", "name": "hash", "type": "bytes32" }, { "internalType": "bytes", "name": "signature", "type": "bytes" }], "name": "claimNFT", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "getApproved", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_tokenId", "type": "uint256" }], "name": "getAuctionInfo", "outputs": [{ "components": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "internalType": "uint256", "name": "basePrice", "type": "uint256" }, { "internalType": "string", "name": "tokenURI", "type": "string" }, { "internalType": "bool", "name": "isAuctionEnded", "type": "bool" }, { "internalType": "uint256", "name": "startTime", "type": "uint256" }, { "internalType": "uint256", "name": "endTime", "type": "uint256" }, { "internalType": "address", "name": "highestBidder", "type": "address" }, { "internalType": "uint256", "name": "highestBid", "type": "uint256" }], "internalType": "struct LazyMinting.AuctionNFTVoucher", "name": "", "type": "tuple" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "owner", "type": "address" }, { "internalType": "address", "name": "operator", "type": "address" }], "name": "isApprovedForAll", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "name", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "ownerOf", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "renounceOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "from", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "safeTransferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "from", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "internalType": "bytes", "name": "_data", "type": "bytes" }], "name": "safeTransferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "operator", "type": "address" }, { "internalType": "bool", "name": "approved", "type": "bool" }], "name": "setApprovalForAll", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "bytes4", "name": "interfaceId", "type": "bytes4" }], "name": "supportsInterface", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "symbol", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "tokenURI", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "from", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "transferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "newOwner", "type": "address" }], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }];
+        var smartContractAddress = '0x3152DCE728E5C5Fab2ae91f9Bf509e6dBd843f1B';
+        var smartContractAbi = [{ "inputs": [], "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "approved", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "Approval", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "operator", "type": "address" }, { "indexed": false, "internalType": "bool", "name": "approved", "type": "bool" }], "name": "ApprovalForAll", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "indexed": true, "internalType": "string", "name": "tokenURI", "type": "string" }, { "indexed": true, "internalType": "uint256", "name": "price", "type": "uint256" }], "name": "Mint", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "uint256", "name": "_tokenId", "type": "uint256" }, { "indexed": false, "internalType": "address", "name": "_bidder", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "_bidAmount", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "_startTime", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "_endTime", "type": "uint256" }], "name": "NftBidded", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "previousOwner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "newOwner", "type": "address" }], "name": "OwnershipTransferred", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "from", "type": "address" }, { "indexed": true, "internalType": "address", "name": "to", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "Transfer", "type": "event" }, { "inputs": [{ "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "approve", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "owner", "type": "address" }], "name": "balanceOf", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_tokenId", "type": "uint256" }, { "internalType": "uint256", "name": "_startTime", "type": "uint256" }, { "internalType": "uint256", "name": "_endTime", "type": "uint256" }, { "internalType": "string", "name": "_tokenURI", "type": "string" }, { "internalType": "bytes32", "name": "hash", "type": "bytes32" }, { "internalType": "bytes", "name": "signature", "type": "bytes" }], "name": "bidNFT", "outputs": [], "stateMutability": "payable", "type": "function" }, { "inputs": [{ "components": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "internalType": "uint256", "name": "price", "type": "uint256" }, { "internalType": "string", "name": "tokenURI", "type": "string" }], "internalType": "struct LazyMinting.SaleNFTVoucher", "name": "voucher", "type": "tuple" }, { "internalType": "bytes32", "name": "hash", "type": "bytes32" }, { "internalType": "bytes", "name": "signature", "type": "bytes" }], "name": "buyNFT", "outputs": [], "stateMutability": "payable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_tokenId", "type": "uint256" }, { "internalType": "bytes32", "name": "hash", "type": "bytes32" }, { "internalType": "bytes", "name": "signature", "type": "bytes" }], "name": "claimNFT", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "getApproved", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_tokenId", "type": "uint256" }], "name": "getAuctionInfo", "outputs": [{ "components": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "internalType": "uint256", "name": "basePrice", "type": "uint256" }, { "internalType": "string", "name": "tokenURI", "type": "string" }, { "internalType": "bool", "name": "isAuctionEnded", "type": "bool" }, { "internalType": "uint256", "name": "startTime", "type": "uint256" }, { "internalType": "uint256", "name": "endTime", "type": "uint256" }, { "internalType": "address", "name": "highestBidder", "type": "address" }, { "internalType": "uint256", "name": "highestBid", "type": "uint256" }], "internalType": "struct LazyMinting.AuctionNFTVoucher", "name": "", "type": "tuple" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "owner", "type": "address" }, { "internalType": "address", "name": "operator", "type": "address" }], "name": "isApprovedForAll", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "name", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "ownerOf", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "renounceOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "from", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "safeTransferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "from", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "internalType": "bytes", "name": "_data", "type": "bytes" }], "name": "safeTransferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "operator", "type": "address" }, { "internalType": "bool", "name": "approved", "type": "bool" }], "name": "setApprovalForAll", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "bytes4", "name": "interfaceId", "type": "bytes4" }], "name": "supportsInterface", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "symbol", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "tokenURI", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "from", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "transferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "newOwner", "type": "address" }], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }];
         var myContract, provider, signer, daiWithSigner, getAccounts, getAddress
 
         var mentor = document.getElementById("mentor")
@@ -123,26 +123,30 @@
             const isValidContractAddress = ethers.utils.isAddress(contractAddress);
             if (isValidContractAddress && smartContractAddress == contractAddress) {
                 try {
-                    let tupleMessage = ethers.utils.solidityPack(['uint256', 'address', 'uint256', 'uint256', 'string'], [chainId, contractAddress, tokenId.toString(), price.toString(), tokenURI]);
-                    messageHash = ethers.utils.keccak256(tupleMessage);
-                    let messageBytes = ethers.utils.arrayify(messageHash);
-                    signature = await signer.signMessage(messageBytes);
-                    TokenId = tokenId;
-                    Price = price.toString();
-                    TokenURI = tokenURI;
-                    Hash = messageHash;
-                    Signature = signature;
-                    ChainID = chainId.toString();
-                    TimeStamp = Math.floor(Date.now() / 1000) + timeStamp
-                    console.log("contractAddress ===>", contractAddress)
-                    console.log("TokenId ===>", TokenId)
-                    console.log("Price ===>", Price)
-                    console.log("TokenURI ===>", TokenURI)
-                    console.log("ChainId ===>", chainId)
-                    console.log("Hash ===>", Hash)
-                    console.log("Signature ===>", Signature)
-                    console.log("TimeStamp ===>", TimeStamp)
-                    console.log("Date.now() ===>", Math.floor(Date.now() / 1000))
+                    if (timeStamp != 0) {
+                        let tupleMessage = ethers.utils.solidityPack(['uint256', 'address', 'uint256', 'uint256', 'string'], [chainId, contractAddress, tokenId.toString(), price.toString(), tokenURI]);
+                        messageHash = ethers.utils.keccak256(tupleMessage);
+                        let messageBytes = ethers.utils.arrayify(messageHash);
+                        signature = await signer.signMessage(messageBytes);
+                        TokenId = tokenId;
+                        Price = price.toString();
+                        TokenURI = tokenURI;
+                        Hash = messageHash;
+                        Signature = signature;
+                        ChainID = chainId.toString();
+                        TimeStamp = Math.floor(Date.now() / 1000) + timeStamp;
+                        console.log("contractAddress ===>", contractAddress)
+                        console.log("TokenId ===>", TokenId)
+                        console.log("Price ===>", Price)
+                        console.log("TokenURI ===>", TokenURI)
+                        console.log("ChainId ===>", chainId)
+                        console.log("Hash ===>", Hash)
+                        console.log("Signature ===>", Signature)
+                        console.log("TimeStamp ===>", TimeStamp)
+                        console.log("Date.now() ===>", Math.floor(Date.now() / 1000))
+                    } else {
+                        alert("TimeStamp cannot be 0");
+                    }
                 } catch (error) {
                     console.log(error.message)
                 }
@@ -156,27 +160,31 @@
             const isValidContractAddress = ethers.utils.isAddress(contractAddress);
             if (isValidContractAddress && smartContractAddress == contractAddress) {
                 try {
-                    let tupleMessage = ethers.utils.solidityPack(['address', 'uint256', 'address', 'uint256', 'uint256', 'string', 'uint256', 'uint256'], [getAddress, chainId, contractAddress, tokenId.toString(), basePrice.toString(), tokenURI, startTime, endTime]);
-                    messageHash = ethers.utils.keccak256(tupleMessage);
-                    let messageBytes = ethers.utils.arrayify(messageHash);
-                    signature = await signer.signMessage(messageBytes);
-                    TokenId = tokenId;
-                    BasePrice = basePrice.toString();
-                    TokenURI = tokenURI;
-                    Hash = messageHash;
-                    Signature = signature;
-                    ChainID = chainId.toString();
-                    StartTime = Math.floor(Date.now() / 1000) + startTime;
-                    EndTime = Math.floor(Date.now() / 1000) + endTime;
-                    console.log("contractAddress ===>", contractAddress)
-                    console.log("TokenId ===>", TokenId)
-                    console.log("Price ===>", Price)
-                    console.log("TokenURI ===>", TokenURI)
-                    console.log("ChainId ===>", chainId)
-                    console.log("Hash ===>", Hash)
-                    console.log("Signature ===>", Signature)
-                    console.log("StartTime ===>", StartTime)
-                    console.log("EndTime ===>", EndTime)
+                    if (startTime != 0 && endTime != 0 && endTime > startTime) {
+                        let tupleMessage = ethers.utils.solidityPack(['address', 'uint256', 'address', 'uint256', 'uint256', 'string', 'uint256', 'uint256'], [getAddress, chainId, contractAddress, tokenId.toString(), basePrice.toString(), tokenURI, startTime, endTime]);
+                        messageHash = ethers.utils.keccak256(tupleMessage);
+                        let messageBytes = ethers.utils.arrayify(messageHash);
+                        signature = await signer.signMessage(messageBytes);
+                        TokenId = tokenId;
+                        BasePrice = basePrice.toString();
+                        TokenURI = tokenURI;
+                        Hash = messageHash;
+                        Signature = signature;
+                        ChainID = chainId.toString();
+                        StartTime = Math.floor(Date.now() / 1000) + startTime;
+                        EndTime = Math.floor(Date.now() / 1000) + endTime;
+                        console.log("contractAddress ===>", contractAddress)
+                        console.log("TokenId ===>", TokenId)
+                        console.log("Price ===>", Price)
+                        console.log("TokenURI ===>", TokenURI)
+                        console.log("ChainId ===>", chainId)
+                        console.log("Hash ===>", Hash)
+                        console.log("Signature ===>", Signature)
+                        console.log("StartTime ===>", StartTime)
+                        console.log("EndTime ===>", EndTime)
+                    } else {
+                        alert("Invalid parameters");
+                    }
                 } catch (error) {
                     console.log(error.message)
                 }
@@ -242,14 +250,14 @@
                                     const auctionInfo = await myContract.getAuctionInfo(TokenId);
                                     if ((auctionInfo.highestBid).toNumber() == 0) {
                                         if (BasePrice.toString() === BidPrice.value.toString()) {
-                                            myContract.bidNFT(TokenId, StartTime, EndTime, Hash, Signature, { value: BidPrice.value.toString() }).then((res) => {
+                                            myContract.bidNFT(TokenId, StartTime, EndTime, Hash, Signature, TokenURI, { value: BidPrice.value.toString() }).then((res) => {
                                                 console.log(res)
                                             });
                                         } else {
                                             alert("Invalid BasePrice");
                                         }
                                     } else {
-                                        myContract.bidNFT(TokenId, StartTime, EndTime, Hash, Signature, { value: BidPrice.value.toString() }).then((res) => {
+                                        myContract.bidNFT(TokenId, StartTime, EndTime, Hash, Signature, TokenURI, { value: BidPrice.value.toString() }).then((res) => {
                                             console.log(res)
                                         });
                                     }
