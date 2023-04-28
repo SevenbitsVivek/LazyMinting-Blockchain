@@ -39,9 +39,9 @@ contract LazyMinting is  ERC721URIStorage, Ownable, ReentrancyGuard{
         uint256 indexed price
     );
 
-    constructor() ERC721("MyNFT", "MNFT") {}
-
     event NftBidded(uint256 indexed _tokenId, address _bidder, uint256 indexed _bidAmount, uint256 _startTime, uint256 _endTime);
+    
+    constructor() ERC721("MyNFT", "MNFT") {}
 
     mapping(bytes => bool) private signatureUsed;
     mapping(uint256 => AuctionNFTVoucher) private auctionNFTVoucher;
