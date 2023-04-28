@@ -32,11 +32,10 @@
                             <div class="input-group mb-3 mt-4">
                                 <div class="form-group col-lg-12">
                                     <label for="hashForSale" class="mail">Hash</label>
-                                    <input type="text" id="hashForSale" class="form-control" type="text"
-                                        placeholder="hash">
+                                    <input type="text" id="hashForSale" class="form-control" placeholder="hash">
                                     </input><br>
                                     <label for="signatureForSale" class="mail">Signature</label>
-                                    <input type="text" id="signatureForSale" class="form-control" type="text"
+                                    <input type="text" id="signatureForSale" class="form-control"
                                         placeholder="signature"> </input>
                                 </div>
                                 <div class="container d-flex justify-content-center">
@@ -54,17 +53,16 @@
                             <div class="input-group mb-3 mt-4">
                                 <div class="form-group col-lg-12">
                                     <label for="hashForAuction" class="mail">Hash</label>
-                                    <input type="text" id="hashForAuction" class="form-control" type="text"
-                                        placeholder="hash">
+                                    <input type="text" id="hashForAuction" class="form-control" placeholder="hash">
                                     </input><br>
                                     <label for="signatureForAuction" class="mail">Signature</label>
-                                    <input type="text" id="signatureForAuction" class="form-control" type="text"
+                                    <input type="text" id="signatureForAuction" class="form-control"
                                         placeholder="signature"> </input><br>
                                     <label for="tokenIdForAuction" class="mail">Token Id</label>
-                                    <input type="text" id="tokenIdForAuction" class="form-control" type="Number"
+                                    <input type="Number" id="tokenIdForAuction" class="form-control"
                                         placeholder="tokenId"> </input><br>
                                     <label for="bidPriceForAuction" class="mail">Bid Price</label>
-                                    <input type="text" id="bidPriceForAuction" class="form-control" type="Number"
+                                    <input type="Number" id="bidPriceForAuction" class="form-control" type="Number"
                                         placeholder="bidPrice"> </input>
                                 </div>
                             </div>
@@ -81,14 +79,13 @@
                             <div class="input-group mb-3 mt-4">
                                 <div class="form-group col-lg-12">
                                     <label for="hashForClaim" class="mail">Hash</label>
-                                    <input type="text" id="hashForClaim" class="form-control" type="text"
-                                        placeholder="hash">
+                                    <input type="text" id="hashForClaim" class="form-control" placeholder="hash">
                                     </input><br>
                                     <label for="signatureForClaim" class="mail">Signature</label>
-                                    <input type="text" id="signatureForClaim" class="form-control" type="text"
+                                    <input type="text" id="signatureForClaim" class="form-control"
                                         placeholder="signature"> </input><br>
                                     <label for="tokenIdForClaim" class="mail">Token Id</label>
-                                    <input type="Number" id="tokenIdForClaim" class="form-control" type="Number"
+                                    <input type="Number" id="tokenIdForClaim" class="form-control"
                                         placeholder="tokenId"> </input>
                                 </div>
                             </div>
@@ -262,10 +259,10 @@
                             alert("Hash is empty!");
                         } else if (SignatureForAuction.value == "") {
                             alert("Signature is empty!");
-                        } else if (BidPriceForAuction.value == "") {
-                            alert("BidPrice is empty!");
                         } else if (TokenIdForAuction.value == "") {
                             alert("TokenId is empty!");
+                        } else if (BidPriceForAuction.value == "") {
+                            alert("BidPrice is empty!");
                         } else {
                             if (SignatureForAuction.value === signature && HashForAuction.value === messageHash) {
                                 if (Math.floor(Date.now() / 1000) >= StartTime) {
