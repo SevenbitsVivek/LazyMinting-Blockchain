@@ -16,13 +16,13 @@ contract LazyMinting is  ERC721URIStorage, Ownable, ReentrancyGuard{
     // Create a new role identifier for the minter role
     address signer;
 
-    struct NFTVoucher {
+    struct SaleNFTVoucher {
         uint256 tokenId;
         uint256 price;
         string tokenURI; 
     }
 
-    struct AuctionNFT {
+    struct AuctionNFTVoucher {
         uint256 tokenId;
         uint256 basePrice;
         string tokenURI; 
@@ -32,7 +32,7 @@ contract LazyMinting is  ERC721URIStorage, Ownable, ReentrancyGuard{
         address highestBidder;
         uint256 highestBid;
     }
-
+    
     event Mint(
         uint256 indexed tokenId,
         string indexed tokenURI,
@@ -44,18 +44,18 @@ contract LazyMinting is  ERC721URIStorage, Ownable, ReentrancyGuard{
     event NftBidded(uint256 indexed _tokenId, address _bidder, uint256 indexed _bidAmount, uint256 _startTime, uint256 _endTime);
 
     mapping(bytes => bool) private signatureUsed;
-    mapping(uint256 => AuctionNFT) private auctionNft;
+    mapping(uint256 => AuctionNFTVoucher) private auctionNFTVoucher;
     mapping(address => mapping(uint256 => bool)) private isBidded;
 
-    function redeem(NFTVoucher calldata voucher, bytes32 hash, bytes memory signature) nonReentrant external payable {
+    function buyNFT(SaleNFTVoucher calldata voucher, bytes32 hash, bytes memory signature) nonReentrant external payable {
         require(
             recoverSigner(hash, signature) == owner(),
             "Address is not authorized"
         );
-        signer = recoverSigner(hash, signature);
         require(!signatureUsed[signature], "Already signature used");
+        signer = recoverSigner(hash, signature);
         require(signer != msg.sender,"You cannot buy your own NFT");
-        require(msg.value == voucher.price, "Insufficient Funds!!");
+        require(msg.value == voucher.price, "Invalid price");
         // assign token to the signer, and transfer it to on-chain
         _mint(signer, voucher.tokenId);
         _setTokenURI(voucher.tokenId, voucher.tokenURI);
@@ -66,23 +66,23 @@ contract LazyMinting is  ERC721URIStorage, Ownable, ReentrancyGuard{
     }
 
     function bidNFT(uint256 _tokenId, uint256 _startTime, uint256 _endTime, bytes32 hash, bytes memory signature) nonReentrant external payable {
-        require(msg.value > 0, "Value cannot be 0");
+        require(msg.value > 0 && _startTime > 0 && _endTime > 0, "Invalid parameters");
         require(
             recoverSigner(hash, signature) == owner(),
             "Address is not authorized"
         );
-        signer = recoverSigner(hash, signature);
-        require(block.timestamp >= _startTime, "Auction not started yet");
-        require(msg.value >= auctionNft[_tokenId].basePrice, "Invalid basePrice");
-        require(block.timestamp <= _endTime, "Auction time ended");
-        require(!auctionNft[_tokenId].isAuctionEnded, "Auction ended");
         require(!signatureUsed[signature], "Already signature used");
+        require(block.timestamp >= _startTime, "Auction not started yet");
+        require(msg.value >= auctionNFTVoucher[_tokenId].basePrice, "Invalid basePrice");
+        require(block.timestamp <= _endTime, "Auction time ended");
+        require(!auctionNFTVoucher[_tokenId].isAuctionEnded, "Auction ended");
         require(signer != msg.sender,"You cannot bid on your own NFT");
-        uint256 previousHighestBid = auctionNft[_tokenId].highestBid;
+        uint256 previousHighestBid = auctionNFTVoucher[_tokenId].highestBid;
         require(msg.value > previousHighestBid, "Invalid previousHighestBid");
-        address previousHighestBidder = auctionNft[_tokenId].highestBidder;
-        auctionNft[_tokenId].startTime = _startTime;
-        auctionNft[_tokenId].endTime = _endTime;
+        signer = recoverSigner(hash, signature);
+        address previousHighestBidder = auctionNFTVoucher[_tokenId].highestBidder;
+        auctionNFTVoucher[_tokenId].startTime = _startTime;
+        auctionNFTVoucher[_tokenId].endTime = _endTime;
         if (msg.value > previousHighestBid) {
             if(!isBidded[msg.sender][_tokenId]) {
                 isBidded[msg.sender][_tokenId] = true;
@@ -93,36 +93,37 @@ contract LazyMinting is  ERC721URIStorage, Ownable, ReentrancyGuard{
                 payable(previousHighestBidder).transfer(previousHighestBid);
             }
             // Update auction information with new highest bidder and bid
-            auctionNft[_tokenId].highestBidder = msg.sender;
-            auctionNft[_tokenId].highestBid = msg.value;
-            auctionNft[_tokenId].tokenId = _tokenId;
-            emit NftBidded(_tokenId, msg.sender, msg.value, block.timestamp, auctionNft[_tokenId].endTime);
+            auctionNFTVoucher[_tokenId].highestBidder = msg.sender;
+            auctionNFTVoucher[_tokenId].highestBid = msg.value;
+            auctionNFTVoucher[_tokenId].tokenId = _tokenId;
+            emit NftBidded(_tokenId, msg.sender, msg.value, block.timestamp, auctionNFTVoucher[_tokenId].endTime);
         }
     }
 
-    function endAuction(uint256 _tokenId, bytes32 hash, bytes memory signature) nonReentrant external {
+    function claimNFT(uint256 _tokenId, bytes32 hash, bytes memory signature) nonReentrant external {
         require(
             recoverSigner(hash, signature) == owner(),
             "Address is not authorized"
         );
+        require(!signatureUsed[signature], "Already signature used");
+        require(block.timestamp >= auctionNFTVoucher[_tokenId].startTime, "Auction not started yet");
+        require(block.timestamp >= auctionNFTVoucher[_tokenId].endTime, "Auction time not yet ended");
+        require(auctionNFTVoucher[_tokenId].highestBidder == msg.sender, "You are not highest bidder");
+        require(!auctionNFTVoucher[_tokenId].isAuctionEnded, "Auction already ended");
+        require(auctionNFTVoucher[_tokenId].highestBid != 0, "Highest bid canot be 0");
         signer = recoverSigner(hash, signature);
-        require(msg.sender == owner(), "Invalid nft owner");
-        require(block.timestamp >= auctionNft[_tokenId].startTime, "Auction not started yet");
-        require(block.timestamp >= auctionNft[_tokenId].endTime, "Auction time not yet ended");
-        require(!auctionNft[_tokenId].isAuctionEnded, "Auction already ended");
-        require(auctionNft[_tokenId].highestBid != 0, "Highest bid canot be 0");
         // assign token to the signer, and transfer it to on-chain
-        _mint(msg.sender, auctionNft[_tokenId].tokenId);
-        _setTokenURI(auctionNft[_tokenId].tokenId, auctionNft[_tokenId].tokenURI);
-        _transfer(msg.sender, auctionNft[_tokenId].highestBidder, auctionNft[_tokenId].tokenId);
-        payable(msg.sender).transfer(auctionNft[_tokenId].highestBid);
-        auctionNft[_tokenId].isAuctionEnded = true;
+        _mint(signer, auctionNFTVoucher[_tokenId].tokenId);
+        _setTokenURI(auctionNFTVoucher[_tokenId].tokenId, auctionNFTVoucher[_tokenId].tokenURI);
+        _transfer(signer, auctionNFTVoucher[_tokenId].highestBidder, auctionNFTVoucher[_tokenId].tokenId);
+        payable(signer).transfer(auctionNFTVoucher[_tokenId].highestBid);
+        auctionNFTVoucher[_tokenId].isAuctionEnded = true;
         signatureUsed[signature] = true;
-        auctionNft[_tokenId].basePrice = 0;
+        auctionNFTVoucher[_tokenId].basePrice = 0;
     }
 
     function recoverSigner(bytes32 hash, bytes memory signature)
-        public
+        internal
         pure
         returns (address)
     {
@@ -132,8 +133,8 @@ contract LazyMinting is  ERC721URIStorage, Ownable, ReentrancyGuard{
         return ECDSA.recover(messageDigest, signature);
     }
 
-    function getAuctionInfo(uint256 _tokenId) external view returns (AuctionNFT memory) {
-        return auctionNft[_tokenId];
+    function getAuctionInfo(uint256 _tokenId) external view returns (AuctionNFTVoucher memory) {
+        return auctionNFTVoucher[_tokenId];
     }
 
     function supportsInterface(bytes4 interfaceId)
