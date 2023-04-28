@@ -257,7 +257,7 @@
                                             alert("Invalid BasePrice");
                                         }
                                     } else {
-                                        myContract.bidNFT(TokenId, StartTime, EndTime, Hash, Signature, TokenURI, { value: BidPrice.value.toString() }).then((res) => {
+                                        myContract.bidNFT(TokenId, StartTime, EndTime, TokenURI, Hash, Signature, { value: BidPrice.value.toString() }).then((res) => {
                                             console.log(res)
                                         });
                                     }
